@@ -246,10 +246,10 @@ button,input,select{font:inherit}
 .span-7{grid-column:span 7}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-8{grid-column:span 8}
 .card p.desc{color:inherit;opacity:.72;margin:.9rem 0 0;max-width:46ch;font-size:1.02rem}
 .flow{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:14px;padding-top:30px}
-.node{width:96px;height:96px;border-radius:50%;background:var(--panel-2);border:1px solid var(--line);display:grid;place-items:center}
+.node{flex:none;width:96px;height:96px;border-radius:50%;background:var(--panel-2);border:1px solid var(--line);display:grid;place-items:center}
 .node svg{width:40px;height:40px}
 .node.core{width:120px;height:120px;background:#0F1C2E}
-.dash{flex:0 0 38px;border-top:2px dashed var(--muted);opacity:.5}
+.dash{flex:0 1 38px;min-width:14px;border-top:2px dashed var(--muted);opacity:.5}
 .stack{display:grid;grid-template-columns:repeat(2,auto);gap:8px}
 .stack span{font-family:var(--display);font-stretch:100%;font-weight:800;font-size:.8rem;padding:10px 12px;border-radius:10px;background:var(--panel-2);border:1px solid var(--line);white-space:nowrap}
 .stack span:nth-child(1){background:#0F1C2E;color:#fff;border-color:#0F1C2E}
@@ -288,7 +288,8 @@ button,input,select{font:inherit}
 /* ---------- iMac dashboard ---------- */
 .command{padding:40px 0 140px;text-align:center}
 .command .lede{margin:1.4rem auto 0;text-align:center}
-.imac{width:min(1100px,100%);margin:64px auto 0}
+.imac-fit{width:min(1100px,100%);margin:64px auto 0;position:relative}
+.imac{width:1100px;transform-origin:top left}
 .imac-screen{background:#11161E;border-radius:26px 26px 0 0;padding:18px 18px 0}
 .imac-chin{background:linear-gradient(#DADFE5,#C3C9D0);height:62px;border-radius:0 0 26px 26px;display:grid;place-items:center}
 .imac-chin i{width:14px;height:14px;border-radius:50%;background:#AEB5BE}
@@ -446,10 +447,6 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
   .price-box{padding:36px 24px}
   .tier{padding:28px}
   .stat-grid,.stat-row{grid-template-columns:1fr}
-  .dash-ui{grid-template-columns:1fr;height:auto}
-  .side{display:none}
-  .cal{min-height:460px}
-  .kpis .kpi:nth-child(n+2){display:none}
   .foot{grid-template-columns:1fr 1fr}
   .final-copy{order:-1;padding-bottom:8px}
   .final .iphone{margin-bottom:-260px}
@@ -469,11 +466,18 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
   .van-row{grid-template-columns:1fr}
   .tab-chat{padding:26px}
   .tablet{padding:12px;border-radius:30px}
-  .cal{grid-template-columns:36px repeat(3,1fr)}
-  .cal .d4,.cal .d5,.cal .d6{display:none}
   .stat.wide{flex-direction:column;align-items:flex-start}
   .foot{grid-template-columns:1fr}
-  .nav-right .btn{padding:.7rem 1.1rem;font-size:.95rem}
+  .nav-right .btn{padding:.7rem 1.1rem;font-size:.95rem;white-space:nowrap}
+  .nav-bar{padding:.5rem .5rem .5rem 1rem}
+  .nav .logo{font-size:1.12rem;white-space:nowrap;gap:.45rem}
+  .nav .logo svg{width:28px;height:28px}
+  .flow{flex-wrap:wrap;row-gap:22px}
+  .node{width:72px;height:72px}
+  .node svg{width:30px;height:30px}
+  .node.core{width:92px;height:92px}
+  .flow > .dash:nth-child(4){display:none}
+  .flow .stack{flex-basis:100%;justify-content:center}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -841,7 +845,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
     <h2 class="h-lg" style="max-width:16ch;margin-inline:auto">Your whole week, booked while you worked</h2>
     <p class="lede">Every call, recording, transcript, and booked job in one place. Change your hours, service area, or pricing in seconds and see which calls turned into revenue.</p>
 
-    <div class="imac" role="img" aria-label="Desktop dashboard showing a weekly calendar filled with estimates, service calls and emergency jobs booked by the AI">
+    <div class="imac-fit"><div class="imac" role="img" aria-label="Desktop dashboard showing a weekly calendar filled with estimates, service calls and emergency jobs booked by the AI">
       <div class="imac-screen">
         <div class="dash-ui">
           <aside class="side">
@@ -870,7 +874,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
       <div class="imac-chin"><i></i></div>
       <div class="imac-stand"></div>
       <div class="imac-foot"></div>
-    </div>
+    </div></div>
   </div>
 </section>
 
@@ -1043,6 +1047,12 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
   });
   cal.innerHTML=html;
   cal.style.gridTemplateRows='auto 1fr';
+
+  // Scale the iMac like a picture so it keeps desktop proportions on phones
+  const fitEl=document.querySelector('.imac-fit'), imac=document.querySelector('.imac');
+  function fitImac(){const k=Math.min(1,fitEl.clientWidth/1100);imac.style.transform=k<1?`scale(${k})`:'';fitEl.style.height=(imac.offsetHeight*k)+'px';}
+  fitImac();window.addEventListener('resize',fitImac);window.addEventListener('load',fitImac);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitImac);
 
   // Tablet conversation sequence
   const lines=[...document.querySelectorAll('#chat .line')];
