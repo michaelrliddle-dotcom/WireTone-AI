@@ -485,6 +485,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
   .line,.field b,.synced{opacity:1!important;transform:none!important}
 }
 </style>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
 <body>
 
@@ -522,7 +523,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
       </ul>
       <div class="nav-right">
         <a href="#" class="login">Log in</a>
-        <a href="#book" class="btn">Book a demo</a>
+        <a href="https://calendly.com/wiretoneai" target="_blank" rel="noopener" data-calendly class="btn">Book a demo</a>
       </div>
     </nav>
   </div>
@@ -536,7 +537,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
     <h1 class="h-xl">The AI dispatch that books jobs while you're on the job</h1>
     <p class="lede">Every call answered in two rings, day or night. It triages emergencies, quotes your service fees, and puts the job straight on your calendar.</p>
     <div class="hero-cta">
-      <a href="#book" class="btn btn-lg btn-shadow"><svg width="20" height="20"><use href="#phone"/></svg>Book a demo</a>
+      <a href="https://calendly.com/wiretoneai" target="_blank" rel="noopener" data-calendly class="btn btn-lg btn-shadow"><svg width="20" height="20"><use href="#phone"/></svg>Book a demo</a>
       <a href="tel:+14244843182" class="btn btn-lg btn-cristine"><svg width="20" height="20"><use href="#phone"/></svg>Talk To Cristine</a>
     </div>
   </div>
@@ -696,7 +697,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Notifies the assigned technician</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Sends the customer an SMS confirmation</li>
           </ul>
-          <a href="#book" class="btn btn-lg"><svg width="20" height="20"><use href="#phone"/></svg>Book a demo</a>
+          <a href="https://calendly.com/wiretoneai" target="_blank" rel="noopener" data-calendly class="btn btn-lg"><svg width="20" height="20"><use href="#phone"/></svg>Book a demo</a>
         </div>
         <div class="tier t2">
           <span class="tier-tag">Most popular</span>
@@ -711,7 +712,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Structured customer database</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Built-in calendar and job scheduling</li>
           </ul>
-          <a href="#book" class="btn btn-lg"><svg width="20" height="20"><use href="#phone"/></svg>Book a demo</a>
+          <a href="https://calendly.com/wiretoneai" target="_blank" rel="noopener" data-calendly class="btn btn-lg"><svg width="20" height="20"><use href="#phone"/></svg>Book a demo</a>
         </div>
       </div>
     </div>
@@ -725,7 +726,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
       <h2 class="h-lg">One voice agent for every call your shop gets</h2>
       <div>
         <p class="lede">It answers 24/7, books service calls and estimates, sorts real emergencies from routine work, and writes the job into your field service software. Built for single trucks, growing shops, and multi-location outfits.</p>
-        <a href="#book" class="btn">Book a demo</a>
+        <a href="https://calendly.com/wiretoneai" target="_blank" rel="noopener" data-calendly class="btn">Book a demo</a>
       </div>
     </div>
 
@@ -966,7 +967,7 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
       <h2 class="h-lg">Hear it book a job in under a minute</h2>
       <p>Cristine is our AI dispatcher. Call her like a customer would. Report a leak, ask for a quote, try to throw her off.</p>
       <div class="cta-row on-dark">
-        <a href="#pricing" class="btn btn-lg btn-outline-light">Book a demo</a>
+        <a href="https://calendly.com/wiretoneai" target="_blank" rel="noopener" data-calendly class="btn btn-lg btn-outline-light">Book a demo</a>
         <a href="tel:+14244843182" class="btn btn-lg btn-cristine"><svg width="20" height="20"><use href="#phone"/></svg>Talk To Cristine</a>
       </div>
     </div>
@@ -1075,6 +1076,15 @@ footer{background:var(--night);color:#fff;border-top:1px solid var(--night-line)
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){run();io.disconnect();}})},{threshold:.35});
   io.observe(document.getElementById('chat'));
 })();
+</script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[data-calendly]');
+  if(!a||!window.Calendly)return;
+  e.preventDefault();
+  Calendly.initPopupWidget({url:'https://calendly.com/wiretoneai'});
+});
 </script>
 </body>
 </html>
